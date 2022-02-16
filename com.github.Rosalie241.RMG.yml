@@ -87,8 +87,8 @@ modules:
         dest: Source/3rdParty/mupen64plus-input-gca
 
       - type: git
-        url: https://github.com/gonetz/GLideN64.git
-        commit: 49373fde71352cb2496fdaa64efcdc3207190d03
+        url: https://github.com/Rosalie241/GLideN64.git
+        commit: 561a2304ed47b544def0233cae2e220f875d7c67
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
