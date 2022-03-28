@@ -1,6 +1,6 @@
 app-id: com.github.Rosalie241.RMG
 runtime: org.kde.Platform
-runtime-version: "5.15-21.08"
+runtime-version: 5.15-21.08
 sdk: org.kde.Sdk
 command: RMG
 finish-args:
@@ -16,8 +16,8 @@ modules:
       - --disable-static
     sources:
       - type: archive
-        url: https://zlib.net/zlib-1.2.11.tar.gz
-        sha256: c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
+        url: https://zlib.net/zlib-1.2.12.tar.gz
+        sha256: 91844808532e5ce316b3c010929493c0244f3d37593afd6de04f71821d5136d9
         x-checker-data:
           type: anitya
           project-id: 5303
@@ -25,12 +25,12 @@ modules:
           url-template: https://zlib.net/zlib-$version.tar.gz
       - type: shell
         commands:
-          - "GLOBIGNORE=contrib && rm -rf *"
-          - "GLOBIGNORE=contrib/minizip && rm -rf contrib/*"
-          - "rm -f contrib/minizip/Makefile"
-          - "autoreconf -fiv contrib/minizip"
+          - GLOBIGNORE=contrib && rm -rf *
+          - GLOBIGNORE=contrib/minizip && rm -rf contrib/*
+          - rm -f contrib/minizip/Makefile
+          - autoreconf -fiv contrib/minizip
     cleanup:
-      - "*.la"
+      - '*.la'
 
   - name: hidapi
     sources:
@@ -47,13 +47,13 @@ modules:
   - name: RMG
     buildsystem: cmake
     config-opts:
-      - "-DCMAKE_BUILD_TYPE=Release"
-      - "-DPORTABLE_INSTALL=OFF"
-      - "-DNO_GIT_CLONE=ON"
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DPORTABLE_INSTALL=OFF
+      - -DNO_GIT_CLONE=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: "v0.1.4"
+        tag: v0.1.4
         commit: 5eabb50c1ce1986af786c03632476663f85bfc00
 
       - type: git
