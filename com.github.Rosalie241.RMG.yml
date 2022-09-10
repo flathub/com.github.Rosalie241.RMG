@@ -57,8 +57,8 @@ modules:
         commit: 5eabb50c1ce1986af786c03632476663f85bfc00
 
       - type: git
-        url: https://github.com/Rosalie241/mupen64plus-core.git
-        commit: 6777f942eca0e94b1d433651b881e1bc18e903e6
+        url: https://github.com/mupen64plus/mupen64plus-core.git
+        commit: 828784dd0ec00679acc727444043726d22749ba4
         dest: Source/3rdParty/mupen64plus-core
 
       - type: git
@@ -67,7 +67,7 @@ modules:
         dest: Source/3rdParty/mupen64plus-rsp-hle
 
       - type: git
-        url: https://github.com/loganmc10/parallel-rsp.git
+        url: https://github.com/Rosalie241/parallel-rsp.git
         commit: e67cee3131651c3e48343294d94fa68a6f8ec14c
         dest: Source/3rdParty/mupen64plus-rsp-parallel
 
@@ -88,10 +88,10 @@ modules:
 
       - type: git
         url: https://github.com/gonetz/GLideN64.git
-        commit: b0385c5100de206130d244a647546be7e723b1cf
+        commit: a2f16608b395515c60067f29c12d95c63975d33b
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
-        url: https://github.com/loganmc10/parallel-rdp-standalone.git
+        url: https://github.com/Rosalie241/parallel-rdp-standalone.git
         commit: 96368886b5808bc7bae9eb025d3c4f0988772e1d
         dest: Source/3rdParty/mupen64plus-video-parallel
