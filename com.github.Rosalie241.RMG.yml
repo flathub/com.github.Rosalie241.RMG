@@ -8,6 +8,7 @@ finish-args:
   - --socket=pulseaudio
   - --share=ipc
   - --device=all
+  - --filesystem=xdg-pictures/RMG:create
 
 modules:
   - name: minizip
@@ -53,8 +54,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.1.5
-        commit: 04721b42342ecd36c41618480ee80ce64015019f
+        tag: v0.1.6
+        commit: 965dec25fdd0aa1109488854d070b5e5124b2109
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
