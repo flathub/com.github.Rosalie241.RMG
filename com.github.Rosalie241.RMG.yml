@@ -9,6 +9,16 @@ finish-args:
   - --share=ipc
   - --device=all
   - --filesystem=xdg-pictures/RMG:create
+  - --filesystem=xdg-run/discord-ipc-0
+  - --filesystem=xdg-run/discord-ipc-1
+  - --filesystem=xdg-run/discord-ipc-2
+  - --filesystem=xdg-run/discord-ipc-3
+  - --filesystem=xdg-run/discord-ipc-4
+  - --filesystem=xdg-run/discord-ipc-5
+  - --filesystem=xdg-run/discord-ipc-6
+  - --filesystem=xdg-run/discord-ipc-7
+  - --filesystem=xdg-run/discord-ipc-8
+  - --filesystem=xdg-run/discord-ipc-9
 
 modules:
   - name: minizip
@@ -54,12 +64,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.2.2
-        commit: 40f8fa982daef2e66e4208c9b9f0001834dedecc
+        tag: v0.2.3
+        commit: 9bd0ea0ba656f61b62e72239a7b107954b24292e
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
-        commit: f63e1b35063241738d848f73311496b76c8aa918
+        commit: 673aa48d1ddf843e4889274d1e666f0dca1ab468
         dest: Source/3rdParty/mupen64plus-core
 
       - type: git
@@ -84,7 +94,7 @@ modules:
 
       - type: git
         url: https://github.com/gonetz/GLideN64.git
-        commit: a2ecb92e954fdc1dd1130b331935f04381b29e28
+        commit: 7f30fbd047513b15d62fb0d5c6c915bcc84ff1e4
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
@@ -96,3 +106,14 @@ modules:
         url: https://github.com/Rosalie241/parallel-rdp-standalone.git
         commit: 693f607728aca78d94ba5d45b0ce119b4ccbcd8c
         dest: Source/3rdParty/mupen64plus-video-parallel
+
+      - type: git
+        url: https://github.com/discord/discord-rpc.git
+        commit: 963aa9f3e5ce81a4682c6ca3d136cddda614db33
+        dest: Source/3rdParty/discord-rpc
+
+      - type: git
+        url: https://github.com/Tencent/rapidjson.git
+        commit: f54b0e47a08782a6131cc3d60f94d038fa6e0a51
+        dest: Source/3rdParty/discord-rpc/thirdparty/rapidjson
+        disable-submodules: true
