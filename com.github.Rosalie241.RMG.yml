@@ -61,11 +61,12 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
       - -DNO_GIT_CLONE=ON
+      - -DUSE_QT5=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.2.4
-        commit: 149bd86a8926b6c73e3570b03118056f80e603b2
+        tag: v0.2.5
+        commit: c6625e137d961c507f4b04106a50ad29def90ae7
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
@@ -93,18 +94,18 @@ modules:
         dest: Source/3rdParty/mupen64plus-input-raphnetraw
 
       - type: git
-        url: https://github.com/gonetz/GLideN64.git
-        commit: ff47414c2bd6e572872e9148b2f3e1dbc83e5fee
+        url: https://github.com/Rosalie241/GLideN64.git
+        commit: 27a64b83559c7f0ef89de79996fc9d1702637da9
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
         url: https://github.com/Rosalie241/angrylion-rdp-plus.git
-        commit: 9d71074f6b71750e99ad06a713f28a9c32ad15cb
+        commit: 88c3f64d64811c7407d1f54502012fa67c67ebe8
         dest: Source/3rdParty/mupen64plus-video-angrylion-plus
 
       - type: git
         url: https://github.com/Rosalie241/parallel-rdp-standalone.git
-        commit: 693f607728aca78d94ba5d45b0ce119b4ccbcd8c
+        commit: 471253703c0e1fc84454708d5dd7bba2743ee66a
         dest: Source/3rdParty/mupen64plus-video-parallel
 
       - type: git
