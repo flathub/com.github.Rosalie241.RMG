@@ -65,8 +65,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.2.8
-        commit: 5d20e98abae9c5c60c0ff8a7fddbbca6b2d58caa
+        tag: v0.2.9
+        commit: 32a39afc75e71061a59209badb2ece63910d7ae2
 
       - type: git
         url: https://github.com/Rosalie241/mupen64plus-core.git
