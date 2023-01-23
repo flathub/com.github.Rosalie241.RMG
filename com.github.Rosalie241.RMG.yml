@@ -1,6 +1,6 @@
 app-id: com.github.Rosalie241.RMG
 runtime: org.kde.Platform
-runtime-version: 5.15-22.08
+runtime-version: 6.4
 sdk: org.kde.Sdk
 command: RMG
 finish-args:
@@ -61,16 +61,15 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
       - -DNO_GIT_CLONE=ON
-      - -DUSE_QT5=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.2.9
-        commit: 32a39afc75e71061a59209badb2ece63910d7ae2
+        tag: v0.3.0
+        commit: d8f1a5a118b0f255130f8e77a7f954421fcb6005
 
       - type: git
         url: https://github.com/Rosalie241/mupen64plus-core.git
-        commit: 3b6523edd467eb9224310e0862005c7e5ae9c290
+        commit: cd22443e93c9ee53d2274920ba6904530a79e0c3
         dest: Source/3rdParty/mupen64plus-core
 
       - type: git
@@ -95,7 +94,7 @@ modules:
 
       - type: git
         url: https://github.com/gonetz/GLideN64.git
-        commit: 7bbde56cf08ff96108efb592848e5b6eaac293c9
+        commit: cb6e6cb73363a5787c41b0dc1454631e6073b407
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
@@ -105,7 +104,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/parallel-rdp-standalone.git
-        commit: 88d3626362e41aa9b011fca1f65e1c1237ddb3b2
+        commit: 48abaa5e082add7848e6f98648111c69c4a71632
         dest: Source/3rdParty/mupen64plus-video-parallel
 
       - type: git
@@ -118,3 +117,8 @@ modules:
         commit: f54b0e47a08782a6131cc3d60f94d038fa6e0a51
         dest: Source/3rdParty/discord-rpc/thirdparty/rapidjson
         disable-submodules: true
+
+      - type: git
+        url: https://github.com/ocornut/imgui.git
+        commit: d7c8516a4b848c0291e3d75b627c0843f515f591
+        dest: Source/3rdParty/imgui
