@@ -64,12 +64,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.3.1
-        commit: 486281427c4c8939a92b28cd52f0416fae071b03
+        tag: v0.3.2
+        commit: 3707a86c79d1f7b742af2b14d7a546bac8aea092
 
       - type: git
         url: https://github.com/Rosalie241/mupen64plus-core.git
-        commit: fc8edd980a844d11fde64c719591090d09185264
+        commit: 022e7de28067ac633ca23d405e9f0c4ed5cc368b
         dest: Source/3rdParty/mupen64plus-core
 
       - type: git
@@ -122,3 +122,8 @@ modules:
         url: https://github.com/ocornut/imgui.git
         commit: d7c8516a4b848c0291e3d75b627c0843f515f591
         dest: Source/3rdParty/imgui
+
+      - type: git
+        url: https://github.com/gabomdq/SDL_GameControllerDB.git
+        commit: 0562b00eaf5c0308c49d329b79263d2dae1c3a85
+        dest: Source/3rdParty/SDL_GameControllerDB
