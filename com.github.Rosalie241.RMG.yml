@@ -64,12 +64,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.3.2
-        commit: 3707a86c79d1f7b742af2b14d7a546bac8aea092
+        tag: v0.3.3
+        commit: b4e3bede3b881a20e3be554f258c6804fb587af2
 
       - type: git
-        url: https://github.com/Rosalie241/mupen64plus-core.git
-        commit: 022e7de28067ac633ca23d405e9f0c4ed5cc368b
+        url: https://github.com/mupen64plus/mupen64plus-core.git
+        commit: 7ee312cb282a7794c62d5d284bf93151c585dd1f
         dest: Source/3rdParty/mupen64plus-core
 
       - type: git
@@ -84,7 +84,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/parallel-rsp.git
-        commit: e67cee3131651c3e48343294d94fa68a6f8ec14c
+        commit: cfeea3a0f89ba5bc4265acb75778e1267ed1e424
         dest: Source/3rdParty/mupen64plus-rsp-parallel
 
       - type: git
