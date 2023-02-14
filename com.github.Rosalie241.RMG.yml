@@ -46,14 +46,24 @@ modules:
   - name: hidapi
     sources:
       - type: archive
-        url: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.11.2.tar.gz
-        sha256: bc4ac0f32a6b21ef96258a7554c116152e2272dacdec1e4620fc44abeea50c27
+        url: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.13.1.tar.gz
+        sha256: 476a2c9a4dc7d1fc97dd223b84338dbea3809a84caea2dcd887d9778725490e3
+        x-checker-data:
+          type: anitya
+          project-id: 5594
+          stable-only: true
+          url-template: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-$version.tar.gz
     modules:
       - name: libusb
         sources:
           - type: archive
-            url: https://github.com/libusb/libusb/archive/refs/tags/v1.0.24.tar.gz
-            sha256: b7724c272dfc5713dce88ff717efd60f021ca5b7c8e30f08ebb2c42d2eea08ae
+            url: https://github.com/libusb/libusb/archive/refs/tags/v1.0.26.tar.gz
+            sha256: a09bff99c74e03e582aa30759cada218ea8fa03580517e52d463c59c0b25e240
+            x-checker-data:
+              type: anitya
+              project-id: 1749
+              stable-only: true
+              url-template: https://github.com/libusb/libusb/archive/refs/tags/v$version.tar.gz
 
   - name: RMG
     buildsystem: cmake-ninja
