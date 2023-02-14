@@ -64,8 +64,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.3.4
-        commit: 541724b63c2ef5a52a6248a47c6b79a283a02c15
+        tag: v0.3.5
+        commit: fb7402e3943556f37ca3c49a328bbf5e76d584d7
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
@@ -94,7 +94,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/GLideN64.git
-        commit: 698f5580249e2edf86fb89cd75d921535171074c
+        commit: 71dcb55a398a5c4d2bdbfa9fc15b90f301f77a6b
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
@@ -104,7 +104,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/parallel-rdp-standalone.git
-        commit: 48abaa5e082add7848e6f98648111c69c4a71632
+        commit: 2c2226517c4c8929e08ec944654867e26efe0cf5
         dest: Source/3rdParty/mupen64plus-video-parallel
 
       - type: git
