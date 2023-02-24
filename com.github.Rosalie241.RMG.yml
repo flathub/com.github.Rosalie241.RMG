@@ -74,8 +74,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.3.7
-        commit: 83820baf79240ee770ba901f08aff42c8d11a7ee
+        tag: v0.3.8
+        commit: 235e41653de450d32cd12ad3956f048bf2aef642
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
@@ -104,7 +104,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/GLideN64.git
-        commit: 71dcb55a398a5c4d2bdbfa9fc15b90f301f77a6b
+        commit: 937e2a082c63b917654ff59cfc0b5125ad525dce
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
