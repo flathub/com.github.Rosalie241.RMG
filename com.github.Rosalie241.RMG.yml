@@ -74,8 +74,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.3.9
-        commit: 33146626a9711c0342dac88efcaefb2e5a28ca26
+        tag: v0.4.0
+        commit: 66703970b60f6d5fb4ec5bd39cd892439ea88d65
 
       - type: git
         url: https://github.com/mupen64plus/mupen64plus-core.git
@@ -94,7 +94,7 @@ modules:
 
       - type: git
         url: https://github.com/Rosalie241/parallel-rsp.git
-        commit: cfeea3a0f89ba5bc4265acb75778e1267ed1e424
+        commit: dbecbe3a120e428436c5972fa7b872cfc2c9db3e
         dest: Source/3rdParty/mupen64plus-rsp-parallel
 
       - type: git
@@ -104,12 +104,12 @@ modules:
 
       - type: git
         url: https://github.com/gonetz/GLideN64.git
-        commit: 1f4d04f43b53739bc9b128ab5577d20e3d60ed6a
+        commit: 0fee30d010d1feda7d343654871b3dfd05ccab70
         dest: Source/3rdParty/mupen64plus-video-GLideN64
 
       - type: git
         url: https://github.com/Rosalie241/angrylion-rdp-plus.git
-        commit: 158e74d4ec1c818289cd19c3a05e498c3ceff758
+        commit: 670abbc972bd430fa77291b0967dd73128314317
         dest: Source/3rdParty/mupen64plus-video-angrylion-plus
 
       - type: git
