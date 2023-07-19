@@ -70,70 +70,12 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
-      - -DNO_GIT_CLONE=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.4.4
-        commit: d842baa2c57e7b01efb0feaac0a5acfbe0457ec9
-
-      - type: git
-        url: https://github.com/Rosalie241/mupen64plus-core.git
-        commit: 9c4e7837b13ace684b6429674d5e89cc81c57e12
-        dest: Source/3rdParty/mupen64plus-core
-
-      - type: git
-        url: https://github.com/mupen64plus/mupen64plus-rsp-cxd4.git
-        commit: 39f79201baa15890c4cbae92f2215a634cc3ee6d
-        dest: Source/3rdParty/mupen64plus-rsp-cxd4
-
-      - type: git
-        url: https://github.com/mupen64plus/mupen64plus-rsp-hle.git
-        commit: 88093cb43499eff53d343653cddcae2132af17ef
-        dest: Source/3rdParty/mupen64plus-rsp-hle
-
-      - type: git
-        url: https://github.com/Rosalie241/parallel-rsp.git
-        commit: dbecbe3a120e428436c5972fa7b872cfc2c9db3e
-        dest: Source/3rdParty/mupen64plus-rsp-parallel
-
-      - type: git
-        url: https://github.com/raphnet/mupen64plus-input-raphnetraw.git
-        commit: 86112413e98a8648edb11d199673cc24d5799af8
-        dest: Source/3rdParty/mupen64plus-input-raphnetraw
-
-      - type: git
-        url: https://github.com/Rosalie241/GLideN64.git
-        commit: 2f1b358028e700fcae2502a53f4f5e6822ce0367
-        dest: Source/3rdParty/mupen64plus-video-GLideN64
-
-      - type: git
-        url: https://github.com/Rosalie241/angrylion-rdp-plus.git
-        commit: 670abbc972bd430fa77291b0967dd73128314317
-        dest: Source/3rdParty/mupen64plus-video-angrylion-plus
-
-      - type: git
-        url: https://github.com/Rosalie241/parallel-rdp-standalone.git
-        commit: 2c2226517c4c8929e08ec944654867e26efe0cf5
-        dest: Source/3rdParty/mupen64plus-video-parallel
-
-      - type: git
-        url: https://github.com/discord/discord-rpc.git
-        commit: 963aa9f3e5ce81a4682c6ca3d136cddda614db33
-        dest: Source/3rdParty/discord-rpc
-
-      - type: git
-        url: https://github.com/Tencent/rapidjson.git
-        commit: f54b0e47a08782a6131cc3d60f94d038fa6e0a51
-        dest: Source/3rdParty/discord-rpc/thirdparty/rapidjson
-        disable-submodules: true
-
-      - type: git
-        url: https://github.com/ocornut/imgui.git
-        commit: d7c8516a4b848c0291e3d75b627c0843f515f591
-        dest: Source/3rdParty/imgui
-
-      - type: git
-        url: https://github.com/gabomdq/SDL_GameControllerDB.git
-        commit: 5e25aeccb84fb166451443c4cd9fff349e8b0360
-        dest: Source/3rdParty/SDL_GameControllerDB
+        tag: v0.4.5
+        commit: 7c46d9ef41bce5bd0e72633c5b269afc125d0fa8
+        x-checker-data:
+          is-main-source: true
+          type: git
+          tag-pattern: ^(v[\d.]+)$
