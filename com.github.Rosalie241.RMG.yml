@@ -4,7 +4,8 @@ runtime-version: 6.5
 sdk: org.kde.Sdk
 command: RMG
 finish-args:
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --share=ipc
   - --device=all
@@ -73,9 +74,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.4.5
-        commit: 7c46d9ef41bce5bd0e72633c5b269afc125d0fa8
-        x-checker-data:
-          is-main-source: true
-          type: git
-          tag-pattern: ^(v[\d.]+)$
+        commit: 9f1487934b4ae4bef73e4ce6b512fbdd909eebda
