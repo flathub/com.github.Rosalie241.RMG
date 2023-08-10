@@ -70,6 +70,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
+      - -DDRAG_DROP=OFF
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
