@@ -71,11 +71,12 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
       - -DDRAG_DROP=OFF
+      - -DUSE_LIBFMT=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.4.7
-        commit: 829713066b22b1a1cbba28f64027c56bc2c72a11
+        tag: v0.4.9
+        commit: 295040ed5660c5dfa110fefdb9e81bed8fed37e2
         x-checker-data:
           is-main-source: true
           type: git
