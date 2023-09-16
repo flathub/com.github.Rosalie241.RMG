@@ -9,16 +9,6 @@ finish-args:
   - --share=ipc
   - --device=all
   - --filesystem=xdg-pictures/RMG:create
-  - --filesystem=xdg-run/discord-ipc-0
-  - --filesystem=xdg-run/discord-ipc-1
-  - --filesystem=xdg-run/discord-ipc-2
-  - --filesystem=xdg-run/discord-ipc-3
-  - --filesystem=xdg-run/discord-ipc-4
-  - --filesystem=xdg-run/discord-ipc-5
-  - --filesystem=xdg-run/discord-ipc-6
-  - --filesystem=xdg-run/discord-ipc-7
-  - --filesystem=xdg-run/discord-ipc-8
-  - --filesystem=xdg-run/discord-ipc-9
 
 modules:
   - name: minizip
@@ -71,6 +61,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
       - -DPORTABLE_INSTALL=OFF
       - -DDRAG_DROP=OFF
+      - -DDISCORD_RPC=OFF
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
