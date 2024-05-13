@@ -9,6 +9,11 @@ finish-args:
   - --share=ipc
   - --device=all
   - --filesystem=xdg-pictures/RMG:create
+cleanup:
+  - /lib/pkgconfig
+  - /lib/*.la
+  - /lib/*.a
+  - /include
 
 modules:
   - name: minizip
@@ -30,8 +35,6 @@ modules:
           - GLOBIGNORE=contrib/minizip && rm -rf contrib/*
           - rm -f contrib/minizip/Makefile
           - autoreconf -fiv contrib/minizip
-    cleanup:
-      - '*.la'
 
   - name: hidapi
     sources:
@@ -43,6 +46,8 @@ modules:
           project-id: 5594
           stable-only: true
           url-template: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-$version.tar.gz
+    cleanup:
+      - /share/doc
     modules:
       - name: libusb
         sources:
