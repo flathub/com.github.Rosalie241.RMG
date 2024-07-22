@@ -2,6 +2,10 @@ app-id: com.github.Rosalie241.RMG
 runtime: org.kde.Platform
 runtime-version: 6.7
 sdk: org.kde.Sdk
+add-build-extensions:
+  org.freedesktop.Sdk.Extension.rust-stable:
+    version: '23.08'
+    remove-after-build: true
 command: RMG
 finish-args:
   - --socket=x11
@@ -14,6 +18,10 @@ cleanup:
   - /lib/*.la
   - /lib/*.a
   - /include
+build-options:
+  append-path: "/usr/lib/sdk/rust-stable/bin"
+  env:
+    CARGO_HOME: "/run/build/RMG/cargo"
 
 modules:
   - name: minizip
@@ -67,6 +75,7 @@ modules:
       - -DPORTABLE_INSTALL=OFF
       - -DDRAG_DROP=OFF
       - -DDISCORD_RPC=OFF
+      - -DUSE_ANGRYLION=ON
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
@@ -76,3 +85,4 @@ modules:
           is-main-source: true
           type: git
           tag-pattern: ^(v[\d.]+)$
+      - cargo-sources.json
