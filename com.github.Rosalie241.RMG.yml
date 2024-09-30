@@ -19,9 +19,9 @@ cleanup:
   - /lib/*.a
   - /include
 build-options:
-  append-path: "/usr/lib/sdk/rust-stable/bin"
+  append-path: /usr/lib/sdk/rust-stable/bin
   env:
-    CARGO_HOME: "/run/build/RMG/cargo"
+    CARGO_HOME: /run/build/RMG/cargo
 
 modules:
   - name: minizip
@@ -79,8 +79,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.6.5
-        commit: a51cb04e4d33bef34fe423fa530ba561c18bd3b4
+        tag: v0.6.6
+        commit: 9cae93b9bb813f9a32d225724dd062fff3ebf022
         x-checker-data:
           is-main-source: true
           type: git
