@@ -4,7 +4,7 @@ runtime-version: 6.9
 sdk: org.kde.Sdk
 add-build-extensions:
   org.freedesktop.Sdk.Extension.rust-stable:
-    version: '25.08'
+    version: '24.08'
     remove-after-build: true
 command: RMG
 finish-args:
@@ -18,6 +18,7 @@ cleanup:
   - /lib/pkgconfig
   - /lib/*.la
   - /lib/*.a
+  - /lib/cmake
   - /include
 build-options:
   append-path: /usr/lib/sdk/rust-stable/bin
@@ -69,6 +70,15 @@ modules:
               stable-only: true
               url-template: https://github.com/libusb/libusb/archive/refs/tags/v$version.tar.gz
 
+  - name: SDL3
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.22.tar.gz
+        sha256: 911c2d5c3d22efc29af9a2cef6cdfacba30d965242c383d997c93078e6474b01
+
   - name: RMG
     buildsystem: cmake-ninja
     config-opts:
@@ -81,8 +91,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.0
-        commit: 0d1fc16a530d5cea4a8bbd66b633638f9380eda5
+        tag: v0.8.1
+        commit: 0c06aebf72324be4b17c2bdba1b9f8c21b865626
         x-checker-data:
           is-main-source: true
           type: git
