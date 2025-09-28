@@ -91,10 +91,13 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.2
-        commit: 55431be957650fa3408cddb54935339aaf8917fb
+        tag: v0.8.3
+        commit: 9c53a846b86b97e41b4543f0c888e6c716216226
         x-checker-data:
           is-main-source: true
           type: git
           tag-pattern: ^(v[\d.]+)$
+      # TODO: remove when switching runtime to 25.08
+      - type: patch
+        path: patches/rust-compile.patch
       - cargo-sources.json
