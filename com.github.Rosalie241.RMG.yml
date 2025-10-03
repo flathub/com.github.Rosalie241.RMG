@@ -73,16 +73,23 @@ modules:
   - name: SDL3
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.22.tar.gz
-        sha256: 911c2d5c3d22efc29af9a2cef6cdfacba30d965242c383d997c93078e6474b01
+        url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.24.tar.gz
+        sha256: 66c374ee7f786abcd8592d18fc5b18b1e3f1c67e923867eee5f9c503cb253afd
+        x-checker-data:
+          type: anitya
+          project-id: 375746
+          stable-only: true
+          versions:
+            <: 4.0.0
+          url-template: https://github.com/libsdl-org/SDL/archive/refs/tags/release-$version.tar.gz
 
   - name: RMG
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DPORTABLE_INSTALL=OFF
       - -DDRAG_DROP=OFF
       - -DDISCORD_RPC=OFF
