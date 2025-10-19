@@ -89,8 +89,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.5
-        commit: a9efdf3db9ff7c49f6513e2980400b07e2b8b9b6
+        tag: v0.8.6
+        commit: 7b4b7a80aea6dd44e044fb9bff440d4c4c878823
         x-checker-data:
           is-main-source: true
           type: git
