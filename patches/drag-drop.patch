@@ -1,0 +1,308 @@
+commit 2aa4828f6fba5c7955cf8f0e08c2af466c05973f
+Author: Rosalie Wanders <rosalie@mailbox.org>
+Date:   Mon Oct 20 12:10:34 2025 +0200
+
+    RMG: add support for drag & drop with KCoreAddons
+    
+    This allows the flatpak to support drag & drop, this is due to Qt6
+    still not supporting the file portal during drag & drop.
+    
+    https://bugreports.qt.io/browse/QTBUG-91357
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bac2301f5..79e7e9814 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.15)
+ option(PORTABLE_INSTALL "Portable Installation" ON)
+ option(UPDATER          "Enables updater" ${WIN32})
+ option(APPIMAGE_UPDATER "Enables AppImage updater" OFF)
+-option(DRAG_DROP        "Enables drag and drop" ON)
++option(KCA_DRAG_DROP    "Enables drag and drop using KCoreAddons" OFF) # https://bugreports.qt.io/browse/QTBUG-91357
+ option(NETPLAY          "Enables netplay" ON)
+ option(VRU              "Enables VRU support in RMG-Input" ON)
+ option(USE_CCACHE       "Enables usage of ccache when ccache has been found" ON)
+diff --git a/Source/RMG/CMakeLists.txt b/Source/RMG/CMakeLists.txt
+index af6402ea4..94ce471b3 100644
+--- a/Source/RMG/CMakeLists.txt
++++ b/Source/RMG/CMakeLists.txt
+@@ -24,9 +24,10 @@ if (APPIMAGE_UPDATER)
+     add_definitions(-DAPPIMAGE_UPDATER)
+ endif(APPIMAGE_UPDATER)
+ 
+-if (DRAG_DROP)
+-    add_definitions(-DDRAG_DROP)
+-endif(DRAG_DROP)
++if (KCA_DRAG_DROP)
++    find_package(KF6CoreAddons REQUIRED)
++    add_definitions(-DKCA_DRAG_DROP)
++endif(KCA_DRAG_DROP)
+ 
+ if (NETPLAY)
+     find_package(Qt6 COMPONENTS WebSockets REQUIRED)
+@@ -148,6 +149,10 @@ if (UPDATER)
+     target_link_libraries(RMG Qt6::Network)
+ endif(UPDATER)
+ 
++if (KCA_DRAG_DROP)
++    target_link_libraries(RMG KF6::CoreAddons)
++endif(KCA_DRAG_DROP)
++
+ if (NETPLAY)
+     target_link_libraries(RMG Qt6::WebSockets)
+ endif(NETPLAY)
+diff --git a/Source/RMG/UserInterface/MainWindow.cpp b/Source/RMG/UserInterface/MainWindow.cpp
+index 0b2a66218..db166181a 100644
+--- a/Source/RMG/UserInterface/MainWindow.cpp
++++ b/Source/RMG/UserInterface/MainWindow.cpp
+@@ -54,6 +54,10 @@
+ #include <QDir>
+ #include <QUrl>
+ 
++#ifdef KCA_DRAG_DROP
++#include <KUrlMimeData>
++#endif
++
+ #include <cstdlib>
+ #include <cmath>
+ 
+@@ -1458,11 +1462,15 @@ void MainWindow::on_EventFilter_KeyReleased(QKeyEvent *event)
+ 
+ void MainWindow::on_EventFilter_FileDropped(QDropEvent *event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData *mimeData = event->mimeData();
+ 
+-    if (!mimeData->hasUrls() || mimeData->urls().empty() ||
+-        !mimeData->urls().first().isLocalFile())
++    QList<QUrl> urls = mimeData->urls();
++#ifdef KCA_DRAG_DROP
++    urls = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferLocalUrls);
++#endif
++
++    if (!mimeData->hasUrls() || urls.empty() ||
++        !urls.first().isLocalFile())
+     {
+         return;
+     }
+@@ -1490,7 +1498,7 @@ void MainWindow::on_EventFilter_FileDropped(QDropEvent *event)
+         }
+     }
+ 
+-    file = mimeData->urls().first().toLocalFile();
++    file = urls.first().toLocalFile();
+ 
+     if (inEmulation)
+     {
+@@ -1505,7 +1513,6 @@ void MainWindow::on_EventFilter_FileDropped(QDropEvent *event)
+     }
+ 
+     this->launchEmulationThread(file, "", refreshRomList, -1, false, true);
+-#endif // DRAG_DROP
+ }
+ 
+ void MainWindow::on_QGuiApplication_applicationStateChanged(Qt::ApplicationState state)
+diff --git a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserEmptyWidget.cpp b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserEmptyWidget.cpp
+index 42d48768f..8830ee1ea 100644
+--- a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserEmptyWidget.cpp
++++ b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserEmptyWidget.cpp
+@@ -20,9 +20,7 @@ using namespace UserInterface::Widget;
+ RomBrowserEmptyWidget::RomBrowserEmptyWidget(QWidget* parent) : QWidget(parent)
+ {
+     this->setupUi(this);
+-#ifdef DRAG_DROP
+     this->setAcceptDrops(true);
+-#endif // DRAG_DROP
+ }
+ 
+ RomBrowserEmptyWidget::~RomBrowserEmptyWidget()
+@@ -31,7 +29,6 @@ RomBrowserEmptyWidget::~RomBrowserEmptyWidget()
+ 
+ void RomBrowserEmptyWidget::dragMoveEvent(QDragMoveEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -41,12 +38,10 @@ void RomBrowserEmptyWidget::dragMoveEvent(QDragMoveEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserEmptyWidget::dragEnterEvent(QDragEnterEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -56,7 +51,6 @@ void RomBrowserEmptyWidget::dragEnterEvent(QDragEnterEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserEmptyWidget::dropEvent(QDropEvent* event)
+diff --git a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserGridViewWidget.cpp b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserGridViewWidget.cpp
+index b43f22374..a68a21de1 100644
+--- a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserGridViewWidget.cpp
++++ b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserGridViewWidget.cpp
+@@ -17,12 +17,10 @@ using namespace UserInterface::Widget;
+ 
+ RomBrowserGridViewWidget::RomBrowserGridViewWidget(QWidget* parent) : QListView(parent)
+ {
+-#ifdef DRAG_DROP
+     // configure drag & drop
+     this->setDragDropMode(QAbstractItemView::DragDropMode::DropOnly);
+     this->setAcceptDrops(true);
+     this->setDropIndicatorShown(true);
+-#endif // DRAG_DROP
+ }
+ 
+ RomBrowserGridViewWidget::~RomBrowserGridViewWidget()
+@@ -31,7 +29,6 @@ RomBrowserGridViewWidget::~RomBrowserGridViewWidget()
+ 
+ void RomBrowserGridViewWidget::dragMoveEvent(QDragMoveEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -41,12 +38,10 @@ void RomBrowserGridViewWidget::dragMoveEvent(QDragMoveEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserGridViewWidget::dragEnterEvent(QDragEnterEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -56,7 +51,6 @@ void RomBrowserGridViewWidget::dragEnterEvent(QDragEnterEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserGridViewWidget::dropEvent(QDropEvent* event)
+diff --git a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserListViewWidget.cpp b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserListViewWidget.cpp
+index c8b476103..ec4228673 100644
+--- a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserListViewWidget.cpp
++++ b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserListViewWidget.cpp
+@@ -17,12 +17,10 @@ using namespace UserInterface::Widget;
+ 
+ RomBrowserListViewWidget::RomBrowserListViewWidget(QWidget* parent) : QTableView(parent)
+ {
+-#ifdef DRAG_DROP
+     // configure drag & drop
+     this->setDragDropMode(QAbstractItemView::DragDropMode::DropOnly);
+     this->setAcceptDrops(true);
+     this->setDropIndicatorShown(true);
+-#endif // DRAG_DROP
+ }
+ 
+ RomBrowserListViewWidget::~RomBrowserListViewWidget()
+@@ -31,7 +29,6 @@ RomBrowserListViewWidget::~RomBrowserListViewWidget()
+ 
+ void RomBrowserListViewWidget::dragMoveEvent(QDragMoveEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -41,12 +38,10 @@ void RomBrowserListViewWidget::dragMoveEvent(QDragMoveEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserListViewWidget::dragEnterEvent(QDragEnterEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -56,7 +51,6 @@ void RomBrowserListViewWidget::dragEnterEvent(QDragEnterEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserListViewWidget::dropEvent(QDropEvent* event)
+diff --git a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserLoadingWidget.cpp b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserLoadingWidget.cpp
+index 3aa41f61d..1ed3e568d 100644
+--- a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserLoadingWidget.cpp
++++ b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserLoadingWidget.cpp
+@@ -30,10 +30,8 @@ RomBrowserLoadingWidget::RomBrowserLoadingWidget(QWidget* parent) : QWidget(pare
+ 
+     this->setLayout(layout);
+ 
+-#ifdef DRAG_DROP
+     // configure drag & drop
+     this->setAcceptDrops(true);
+-#endif // DRAG_DROP
+ }
+ 
+ RomBrowserLoadingWidget::~RomBrowserLoadingWidget()
+@@ -53,7 +51,6 @@ void RomBrowserLoadingWidget::SetCurrentRomIndex(int index, int count)
+ 
+ void RomBrowserLoadingWidget::dragMoveEvent(QDragMoveEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -63,12 +60,10 @@ void RomBrowserLoadingWidget::dragMoveEvent(QDragMoveEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserLoadingWidget::dragEnterEvent(QDragEnterEvent* event)
+ {
+-#ifdef DRAG_DROP
+     const QMimeData* mimeData = event->mimeData();
+ 
+     if (!mimeData->hasUrls() || !mimeData->urls().first().isLocalFile())
+@@ -78,7 +73,6 @@ void RomBrowserLoadingWidget::dragEnterEvent(QDragEnterEvent* event)
+     }
+ 
+     event->acceptProposedAction();
+-#endif // DRAG_DROP
+ }
+ 
+ void RomBrowserLoadingWidget::dropEvent(QDropEvent* event)
+diff --git a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserWidget.cpp b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserWidget.cpp
+index 6f866dbe1..6bf69b80e 100644
+--- a/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserWidget.cpp
++++ b/Source/RMG/UserInterface/Widget/RomBrowser/RomBrowserWidget.cpp
+@@ -161,9 +161,7 @@ RomBrowserWidget::RomBrowserWidget(QWidget *parent) : QWidget(parent)
+     this->gridViewWidget->setModel(this->gridViewProxyModel);
+     this->gridViewWidget->setFlow(QListView::Flow::LeftToRight);
+     this->gridViewWidget->setResizeMode(QListView::Adjust);
+-#ifndef DRAG_DROP
+     this->gridViewWidget->setMovement(QListView::Static);
+-#endif // DRAG_DROP
+     this->gridViewWidget->setUniformItemSizes(CoreSettingsGetBoolValue(SettingsID::RomBrowser_GridViewUniformItemSizes));
+     this->gridViewWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+     this->gridViewWidget->setViewMode(QListView::ViewMode::IconMode);
+@@ -183,10 +181,8 @@ RomBrowserWidget::RomBrowserWidget(QWidget *parent) : QWidget(parent)
+     connect(this->gridViewWidget, &Widget::RomBrowserGridViewWidget::ZoomOut, this, &RomBrowserWidget::on_ZoomOut);
+     connect(this->gridViewWidget, &Widget::RomBrowserGridViewWidget::FileDropped, this, &RomBrowserWidget::FileDropped);
+ 
+-#ifdef DRAG_DROP
+     // configure drag & drop
+     this->setAcceptDrops(true);
+-#endif // DRAG_DROP
+ 
+     // configure context menu policy
+     this->setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
