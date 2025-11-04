@@ -1,6 +1,6 @@
 app-id: com.github.Rosalie241.RMG
 runtime: org.kde.Platform
-runtime-version: 6.9
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 command: RMG
 finish-args:
@@ -50,33 +50,6 @@ modules:
           url-template: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-$version.tar.gz
     cleanup:
       - /share/doc
-    modules:
-      - name: libusb
-        sources:
-          - type: archive
-            url: https://github.com/libusb/libusb/archive/refs/tags/v1.0.29.tar.gz
-            sha256: 7c2dd39c0b2589236e48c93247c986ae272e27570942b4163cb00a060fcf1b74
-            x-checker-data:
-              type: anitya
-              project-id: 1749
-              stable-only: true
-              url-template: https://github.com/libusb/libusb/archive/refs/tags/v$version.tar.gz
-
-  - name: SDL3
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.24.tar.gz
-        sha256: 66c374ee7f786abcd8592d18fc5b18b1e3f1c67e923867eee5f9c503cb253afd
-        x-checker-data:
-          type: anitya
-          project-id: 375746
-          stable-only: true
-          versions:
-            <: 4.0.0
-          url-template: https://github.com/libsdl-org/SDL/archive/refs/tags/release-$version.tar.gz
 
   - name: RMG
     buildsystem: cmake-ninja
