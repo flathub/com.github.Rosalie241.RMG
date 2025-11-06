@@ -62,12 +62,9 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.6
-        commit: 7b4b7a80aea6dd44e044fb9bff440d4c4c878823
+        tag: v0.8.7
+        commit: 1b2215cc02e64d229b652014bff4aa50632bd1c6
         x-checker-data:
           is-main-source: true
           type: git
           tag-pattern: ^(v[\d.]+)$
-      # TODO: remove when switching updating to v0.8.7
-      - type: patch
-        path: patches/drag-drop.patch
