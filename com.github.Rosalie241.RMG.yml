@@ -39,6 +39,9 @@ modules:
           - autoreconf -fiv contrib/minizip
 
   - name: hidapi
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
         url: https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.15.0.tar.gz
