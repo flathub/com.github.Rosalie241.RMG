@@ -71,3 +71,6 @@ modules:
           is-main-source: true
           type: git
           tag-pattern: ^(v[\d.]+)$
+       # TODO: remove when switching updating to v0.8.8
+      - type: patch
+        path: patches/disable-asserts.patch
