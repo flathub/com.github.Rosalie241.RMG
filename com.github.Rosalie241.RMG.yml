@@ -61,12 +61,11 @@ modules:
       - -DPORTABLE_INSTALL=OFF
       - -DKCA_DRAG_DROP=ON
       - -DUSE_ANGRYLION=ON
-      - -DUSE_LTO=OFF
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.8
-        commit: 01ebb8ec8dc53ed66c9fb58650475f50cea9d6c2
+        tag: v0.8.9
+        commit: 969d63f182c97ea245d07d76bcf40084bca54019
         x-checker-data:
           is-main-source: true
           type: git
