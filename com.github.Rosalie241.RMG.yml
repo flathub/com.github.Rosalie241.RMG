@@ -24,13 +24,15 @@ modules:
       - --disable-static
     sources:
       - type: archive
-        url: https://zlib.net/zlib-1.3.1.tar.gz
-        sha256: 9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23
+        url: https://zlib.net/zlib-1.3.2.tar.gz
+        sha256: bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16
         x-checker-data:
           type: anitya
           project-id: 5303
           stable-only: true
           url-template: https://zlib.net/zlib-$version.tar.gz
+      - type: patch
+        path: patches/cb14dc9ade3759352417a300e6c2ed73268f1d97.patch
       - type: shell
         commands:
           - GLOBIGNORE=contrib && rm -rf *
@@ -64,8 +66,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.8.9
-        commit: 969d63f182c97ea245d07d76bcf40084bca54019
+        tag: v0.9.0
+        commit: 453f6639734537908c4c2ca35244255bc5424e3d
         x-checker-data:
           is-main-source: true
           type: git
