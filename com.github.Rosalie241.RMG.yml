@@ -56,6 +56,36 @@ modules:
     cleanup:
       - /share/doc
 
+  - name: zstd
+    buildsystem: cmake-ninja
+    subdir: build/cmake
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DZSTD_BUILD_PROGRAMS=OFF
+    sources:
+      - type: archive
+        url: https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz
+        sha256: eb33e51f49a15e023950cd7825ca74a4a2b43db8354825ac24fc1b7ee09e6fa3
+        x-checker-data:
+          type: anitya
+          project-id: 12083
+          stable-only: true
+          url-template: https://github.com/facebook/zstd/releases/download/v$version/zstd-$version.tar.gz
+
+  - name: sdl3-net
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_net/releases/download/release-3.2.0/SDL3_net-3.2.0.tar.gz
+        sha256: 098522fc26d4e302ef9348aee6e76e67fe504dfefd7f596236568f8330570c41
+        x-checker-data:
+          type: anitya
+          project-id: 390566
+          stable-only: true
+          url-template: https://github.com/libsdl-org/SDL_net/releases/download/release-$version/SDL3_net-$version.tar.gz
+
   - name: RMG
     buildsystem: cmake-ninja
     config-opts:
@@ -66,8 +96,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Rosalie241/RMG.git
-        tag: v0.9.0
-        commit: 453f6639734537908c4c2ca35244255bc5424e3d
+        tag: v0.9.1
+        commit: d16e25474dfc56787d82f02b0fb664def58b7f2a
         x-checker-data:
           is-main-source: true
           type: git
